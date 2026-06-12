@@ -95,6 +95,9 @@ finops-cloud-budget-case-study/
 ├── data/
 │   ├── raw/
 │   │   └── .gitkeep
+|   |   └── cloud_budget_2023_dataset.csv
+|   |   └── cloud_budget_2023_dataset_daily_account_summary.csv
+|   |   └── cloud_budget_2023_dataset_monthly_account_summary.csv
 │   └── processed/
 │       └── .gitkeep
 │
