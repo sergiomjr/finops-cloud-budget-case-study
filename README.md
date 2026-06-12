@@ -100,6 +100,7 @@ finops-cloud-budget-case-study/
 |   |   └── cloud_budget_2023_dataset_monthly_account_summary.csv
 │   └── processed/
 │       └── .gitkeep
+|       └── finops_kpis.csv
 │
 ├── src/
 │   └── finops_analysis.py
