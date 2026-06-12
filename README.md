@@ -65,6 +65,8 @@ Local Python / Pandas
       |
       v
 data/raw/cloud_budget_2023_dataset.csv
+data/raw/cloud_budget_2023_dataset_daily_account_summary.csv
+data/raw/cloud_budget_2023_dataset_monthly_account_summary.csv
       |
       v
 Amazon S3 - raw zone
