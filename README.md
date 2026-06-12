@@ -143,7 +143,9 @@ The analysis focuses on the following KPIs:
 Option 1: Download the dataset manually from Kaggle and save it as:
 
 ```text
-data/raw/cloud_budget.csv
+data/raw/cloud_budget_2023_dataset.csv
+data/raw/cloud_budget_2023_dataset_daily_account_summary.csv
+data/raw/cloud_budget_2023_dataset_monthly_account_summary.csv
 ```
 
 Option 2: Use the Kaggle API:
@@ -153,11 +155,7 @@ pip install kaggle
 kaggle datasets download -d rasikaekanayakadevlk/cloud-budget-dataset -p data/raw --unzip
 ```
 
-If necessary, rename the downloaded file to:
 
-```text
-cloud_budget.csv
-```
 
 ### 7.2 Create a Python Virtual Environment
 
