@@ -41,7 +41,7 @@ This project answers questions such as:
 - NumPy
 - Matplotlib
 - scikit-learn
-- VS Code or Jupyter Notebook
+- Jupyter Notebook
 
 ### AWS Free Tier / Low-Cost Architecture
 
