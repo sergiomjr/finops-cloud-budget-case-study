@@ -1,27 +1,33 @@
 -- Replace bucket name before running.
 -- Athena is optional. Keep files small to avoid unexpected cost.
 
-CREATE EXTERNAL TABLE IF NOT EXISTS finops_kpis (
-  month string,
-  service string,
-  team string,
-  actual_cost double,
-  budget double,
-  records int,
-  budget_variance double,
-  budget_variance_pct double,
-  z_score double,
-  anomaly_flag string,
-  recommendation string
+CREATE EXTERNAL TABLE IF NOT EXISTS finops_db.finops_kpis (
+    year_month string,
+    cloud_provider string,
+    account_id string,
+    environment string,
+    total_list_cost double,
+    total_net_cost double,
+    total_on_demand_cost double,
+    total_amortized_cost double,
+    total_forecast_monthly_cost double,
+    total_budget_amount double,
+    avg_budget_utilization_pct double,
+    avg_cost_variance_7d_pct double,
+    avg_cost_variance_30d_pct double,
+    anomaly_count bigint,
+    row_count bigint
 )
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES (
-  "separatorChar" = ",",
-  "quoteChar" = "\""
+    'separatorChar' = ',',
+    'quoteChar' = '"',
+    'escapeChar' = '\\'
 )
-LOCATION 's3://finops-cloud-budget-sergio-2026/processed/'
+STORED AS TEXTFILE
+LOCATION 's3://finops-cloud-budget-sergiomjr-2026-523271872890-us-east-2-an/processed/'
 TBLPROPERTIES (
-  "skip.header.line.count"="1"
+    'skip.header.line.count'='1'
 );
 
 -- Example queries
