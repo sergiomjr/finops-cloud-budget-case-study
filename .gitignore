@@ -5,3 +5,5 @@ data/raw/*.csv
 data/processed/*.csv
 *.zip
 .env
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

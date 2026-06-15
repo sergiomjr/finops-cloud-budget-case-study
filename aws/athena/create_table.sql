@@ -33,23 +33,23 @@ TBLPROPERTIES (
 -- Example queries
 
 SELECT
-  month,
-  SUM(actual_cost) AS total_cost,
-  SUM(budget) AS total_budget,
-  SUM(budget_variance) AS variance
-FROM finops_kpis
-GROUP BY month
-ORDER BY month;
+    year_month,
+    ROUND(SUM(total_net_cost), 2) AS actual_net_cost,
+    ROUND(SUM(total_forecast_monthly_cost), 2) AS forecast_cost,
+    ROUND(SUM(total_budget_amount), 2) AS budget_amount
+FROM finops_db.finops_kpis
+GROUP BY year_month
+ORDER BY year_month;
 
 SELECT
-  service,
-  SUM(actual_cost) AS total_cost
-FROM finops_kpis
-GROUP BY service
-ORDER BY total_cost DESC
+    cloud_provider,
+    ROUND(SUM(total_net_cost), 2) AS total_net_cost
+FROM finops_db.finops_kpis
+GROUP BY cloud_provider
+ORDER BY total_net_cost DESC
 LIMIT 5;
 
 SELECT *
-FROM finops_kpis
-WHERE anomaly_flag = 'Y'
-ORDER BY ABS(z_score) DESC;
+FROM finops_db.finops_kpis
+WHERE anomaly_count > 0
+ORDER BY anomaly_count DESC, total_net_cost DESC;

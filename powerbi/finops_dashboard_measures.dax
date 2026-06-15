@@ -1,0 +1,30 @@
+// Power BI calculated column and measures for the FinOps Athena KPI extract
+// Table name expected after import: finops_kpis_athena
+
+Month Date = DATEVALUE(finops_kpis_athena[year_month] & "-01")
+
+Total Net Cost = SUM(finops_kpis_athena[total_net_cost])
+
+Total Budget = SUM(finops_kpis_athena[total_budget_amount])
+
+Total Forecast = SUM(finops_kpis_athena[total_forecast_monthly_cost])
+
+Budget Variance = [Total Budget] - [Total Net Cost]
+
+Budget Utilization % = DIVIDE([Total Net Cost], [Total Budget])
+
+Forecast Variance = [Total Forecast] - [Total Net Cost]
+
+Forecast Utilization % = DIVIDE([Total Net Cost], [Total Forecast])
+
+On Demand Cost = SUM(finops_kpis_athena[total_on_demand_cost])
+
+Amortized Cost = SUM(finops_kpis_athena[total_amortized_cost])
+
+Anomaly Count = SUM(finops_kpis_athena[anomaly_count])
+
+KPI Rows = SUM(finops_kpis_athena[row_count])
+
+Average 7D Variance % = AVERAGE(finops_kpis_athena[avg_cost_variance_7d_pct])
+
+Average 30D Variance % = AVERAGE(finops_kpis_athena[avg_cost_variance_30d_pct])

@@ -87,32 +87,37 @@ Power BI / Tableau / Athena / Local Dashboard
 
 ```text
 finops-cloud-budget-case-study/
-│
-├── README.md
-├── requirements.txt
-├── .gitignore
-│
-├── data/
-│   ├── raw/
-│   │   └── .gitkeep
-|   |   └── cloud_budget_2023_dataset.csv
-|   |   └── cloud_budget_2023_dataset_daily_account_summary.csv
-|   |   └── cloud_budget_2023_dataset_monthly_account_summary.csv
-│   └── processed/
-│       └── .gitkeep
-|       └── finops_kpis.csv
-│
-├── src/
-│   └── finops_analysis.py
-│
-├── aws/
-│   ├── lambda/
-│   │   └── lambda_function.py
-│   └── athena/
-│       └── create_table.sql
-│
-└── docs/
-    └── interview_talking_points.md
+|-- README.md
+|-- requirements.txt
+|-- .gitignore
+|-- data/
+|   |-- raw/
+|   |   |-- .gitkeep
+|   |   |-- cloud_budget_2023_dataset.csv
+|   |   |-- cloud_budget_2023_dataset_daily_account_summary.csv
+|   |   `-- cloud_budget_2023_dataset_monthly_account_summary.csv
+|   `-- processed/
+|       |-- .gitkeep
+|       `-- finops_kpis_athena.csv
+|-- src/
+|   `-- finops_analysis.py
+|-- aws/
+|   |-- lambda/
+|   |   `-- lambda_function.py
+|   `-- athena/
+|       |-- create_table.sql
+|       `-- finops_queries.sql
+|-- powerbi/
+|   |-- finops_dashboard_measures.dax
+|   |-- finops_dashboard_spec.md
+|   `-- finops_exec_theme.json
+`-- docs/
+    |-- interview_talking_points.md
+    |-- 05_athena_cost_by_provider.png
+    |-- 06_athena_actual_vs_forecast.png
+    |-- 07_athena_view_monthly_summary.png
+    |-- powerbi_dashboard_executive.png
+    `-- powerbi_dashboard_cost_drivers.png
 ```
 
 ---
@@ -261,6 +266,12 @@ The file below contains a sample external table definition:
 aws/athena/create_table.sql
 ```
 
+Additional Athena analysis queries are available at:
+
+```text
+aws/athena/finops_queries.sql
+```
+
 Cost control recommendations for Athena:
 
 - Use small files for the case study.
@@ -268,6 +279,14 @@ Cost control recommendations for Athena:
 - Use `WHERE` filters.
 - Convert CSV to Parquet in future versions to reduce scanned data.
 - Delete test tables and S3 files after the project.
+
+Athena query result screenshots:
+
+![Athena cost by provider](docs/05_athena_cost_by_provider.png)
+
+![Athena actual vs forecast](docs/06_athena_actual_vs_forecast.png)
+
+![Athena monthly summary view](docs/07_athena_view_monthly_summary.png)
 
 ---
 
@@ -312,6 +331,46 @@ Main findings should include:
 - Anomalous cost behavior
 - Forecasted cost trend
 - Practical recommendations for optimization
+
+---
+
+## 10.1 Power BI Executive Dashboard
+
+The Athena KPI extract is available for Power BI Desktop import at:
+
+```text
+data/processed/finops_kpis_athena.csv
+```
+
+Supporting dashboard assets:
+
+- `powerbi/finops_dashboard_spec.md`: recommended page layout and import steps
+- `powerbi/finops_dashboard_measures.dax`: calculated column and DAX measures for KPI cards and charts
+- `powerbi/finops_exec_theme.json`: executive dashboard theme
+
+Recommended Power BI Desktop flow:
+
+1. Open Power BI Desktop.
+2. Select **Get data > Text/CSV**.
+3. Import `data/processed/finops_kpis_athena.csv`.
+4. Name the table `finops_kpis_athena`.
+5. Add the calculated column and measures from `powerbi/finops_dashboard_measures.dax`.
+6. Apply `powerbi/finops_exec_theme.json` from **View > Themes > Browse for themes**.
+
+Executive dashboard screenshots:
+
+![Power BI Executive Dashboard](docs/powerbi_dashboard_executive.png)
+
+![Power BI Cost Drivers and Controls](docs/powerbi_dashboard_cost_drivers.png)
+
+Key dashboard readout:
+
+- Total net cloud cost: **$408.0K**
+- Forecast utilization: **25.0%**
+- Budget utilization: **0.02%**
+- Top provider: **AWS**
+- Top environment: **prod**
+- Athena anomaly count: **0**
 
 ---
 

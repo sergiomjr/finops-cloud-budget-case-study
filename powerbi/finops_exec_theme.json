@@ -1,0 +1,51 @@
+{
+  "name": "FinOps Executive",
+  "dataColors": [
+    "#0F766E",
+    "#2563EB",
+    "#D97706",
+    "#7C3AED",
+    "#16A34A",
+    "#DC2626"
+  ],
+  "background": "#F6F7F9",
+  "foreground": "#15202B",
+  "tableAccent": "#0F766E",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#15202B"
+              }
+            },
+            "fontSize": 12
+          }
+        ],
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E4E8F0"
+              }
+            },
+            "radius": 4
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,5 +1,4 @@
-
---Passo 1 — Query: custo por Cloud Provider
+-- Query 1: cost by cloud provider
 SELECT
     cloud_provider,
     ROUND(SUM(total_net_cost), 2) AS total_net_cost,
@@ -9,9 +8,8 @@ FROM finops_db.finops_kpis
 GROUP BY cloud_provider
 ORDER BY total_net_cost DESC;
 
---Passo 2 — Query: custo por ambiente
-
---SELECT
+-- Query 2: cost by environment
+SELECT
     environment,
     ROUND(SUM(total_net_cost), 2) AS total_net_cost,
     ROUND(SUM(total_on_demand_cost), 2) AS total_on_demand_cost,
@@ -20,7 +18,7 @@ FROM finops_db.finops_kpis
 GROUP BY environment
 ORDER BY total_net_cost DESC;
 
---Passo 3 — Query: Actual vs Forecast
+-- Query 3: actual vs forecast by month
 SELECT
     year_month,
     ROUND(SUM(total_net_cost), 2) AS actual_net_cost,
@@ -30,7 +28,7 @@ FROM finops_db.finops_kpis
 GROUP BY year_month
 ORDER BY year_month;
 
---Passo 4 — Query: Actual vs Budget
+-- Query 4: actual vs budget by month
 SELECT
     year_month,
     ROUND(SUM(total_net_cost), 2) AS actual_net_cost,
@@ -41,7 +39,7 @@ FROM finops_db.finops_kpis
 GROUP BY year_month
 ORDER BY year_month;
 
---Passo 5 — Query: anomalias por provider e ambiente
+-- Query 5: anomalies by provider and environment
 SELECT
     cloud_provider,
     environment,
@@ -51,7 +49,7 @@ FROM finops_db.finops_kpis
 GROUP BY cloud_provider, environment
 ORDER BY total_anomalies DESC, total_net_cost DESC;
 
---Passo 6 — Query: top contas por custo
+-- Query 6: top accounts by cost
 SELECT
     account_id,
     ROUND(SUM(total_net_cost), 2) AS total_net_cost,
@@ -62,7 +60,7 @@ GROUP BY account_id
 ORDER BY total_net_cost DESC
 LIMIT 10;
 
---Passo 7 — Criar uma view no Athena
+-- Query 7: monthly summary view for dashboards
 CREATE OR REPLACE VIEW finops_db.vw_finops_monthly_summary AS
 SELECT
     year_month,
@@ -80,7 +78,8 @@ GROUP BY
     year_month,
     cloud_provider,
     environment;
-	
+
 SELECT *
 FROM finops_db.vw_finops_monthly_summary
+ORDER BY year_month, cloud_provider, environment
 LIMIT 10;
