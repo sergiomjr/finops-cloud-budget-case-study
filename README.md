@@ -374,20 +374,7 @@ Key dashboard readout:
 
 ---
 
-## 11. Interview Talking Points
 
-A strong way to present this project in an interview:
-
-> I built a small FinOps case study using a synthetic cloud budget dataset from Kaggle. The goal was to simulate the daily work of a Junior Cloud FinOps Analyst: compare actual spend against budget, identify cost drivers, detect anomalies, create KPIs, forecast future spend, and provide actionable recommendations. I used Python for the analysis and AWS S3/Lambda to demonstrate a low-cost serverless architecture. I also documented how the project could be monitored using AWS Cost Explorer and protected with AWS Budgets.
-
-You can also highlight:
-
-- FinOps is not only about reducing cost. It is about improving cost visibility, accountability, and business value.
-- Cost optimization should be done together with engineering and product teams.
-- Good tagging and clear ownership are essential for cloud financial management.
-- Forecasting helps leadership plan budgets and avoid unexpected cost increases.
-
----
 
 ## 12. Future Improvements
 
